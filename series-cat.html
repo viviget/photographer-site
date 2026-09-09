@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>猫猫 · Yuwei Zhang</title>
+<meta name="description" content="猫猫 — Yuwei Zhang 摄影系列：猫。">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Cormorant+Garamond:wght@400;500;600&family=Noto+Serif+SC:wght@300;400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="layout">
+
+  <aside class="side">
+    <div class="name"><a href="index.html">Yuwei<br>Zhang</a></div>
+    <nav>
+      <ul class="nav-main">
+        <li><a href="overview.html">Overview</a></li>
+        <li>
+          <a href="series-light.html" class="has-sub">Series</a>
+          <ul class="nav-sub">
+            <li><a href="series-light.html">日常的光</a></li>
+            <li><a href="series-cat.html" class="active">猫猫</a></li>
+            <li><a href="series-wood.html">木</a></li>
+            <li><a href="series-water.html">水</a></li>
+            <li><a href="series-dancer.html">舞者</a></li>
+            <li><a href="text.html">文字</a></li>
+          </ul>
+        </li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Info &amp; contact</a></li>
+      </ul>
+    </nav>
+    <div class="copyright">© 2026 Yuwei Zhang</div>
+  </aside>
+
+  <main class="main">
+    <div class="page-head">猫猫</div>
+    <div class="grid" id="grid">
+      <a href="javascript:void(0)" aria-label="趴在黑色网面椅上的困倦猫"><img src="assets/u-chair.jpg" alt="趴在黑色网面椅上的困倦猫" loading="lazy"></a>
+      <a href="javascript:void(0)" aria-label="趴在浅色地板上的白猫"><img src="assets/u-about.jpg" alt="趴在浅色地板上的白猫" loading="lazy"></a>
+      <a href="javascript:void(0)" aria-label="猫鼻与胡须的柔和特写"><img src="assets/u2-banner.jpg" alt="猫鼻与胡须的柔和特写" loading="lazy"></a>
+      <a href="javascript:void(0)" aria-label="桌面上的浅灰英短猫"><img src="assets/u-catdesk.jpg" alt="桌面上的浅灰英短猫" loading="lazy"></a>
+      <a href="javascript:void(0)" aria-label="手托着的蓝眼灰猫"><img src="assets/u-catface.jpg" alt="手托着的蓝眼灰猫" loading="lazy"></a>
+    </div>
+  </main>
+
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="作品大图">
+  <button class="lb-close" id="lbClose" aria-label="关闭"></button>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="上一张">&#8249;</button>
+  <button class="lb-nav lb-next" id="lbNext" aria-label="下一张">&#8250;</button>
+  <img id="lbImg" src="" alt="">
+  <div class="lb-cap" id="lbCap"></div>
+</div>
+
+<script>
+(function(){
+  var items = Array.prototype.slice.call(document.querySelectorAll('.grid a'));
+  var lb = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lbImg');
+  var lbCap = document.getElementById('lbCap');
+  var idx = -1;
+  function show(i){
+    if(items.length === 0) return;
+    idx = (i + items.length) % items.length;
+    var im = items[idx].querySelector('img');
+    lbImg.src = im.src;
+    lbImg.alt = im.alt;
+    lbCap.textContent = (idx + 1) + ' / ' + items.length + ' · ' + im.alt;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  items.forEach(function(a, i){
+    a.addEventListener('click', function(){ show(i); });
+  });
+  function close(){
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function next(){ if(idx >= 0) show(idx + 1); }
+  function prev(){ if(idx >= 0) show(idx - 1); }
+  document.getElementById('lbClose').addEventListener('click', close);
+  document.getElementById('lbNext').addEventListener('click', next);
+  document.getElementById('lbPrev').addEventListener('click', prev);
+  lb.addEventListener('click', function(e){ if(e.target === lb) close(); });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') close();
+    if(e.key === 'ArrowRight') next();
+    if(e.key === 'ArrowLeft') prev();
+  });
+})();
+</script>
+</body>
+</html>

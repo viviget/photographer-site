@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>日常的光 · Yuwei Zhang</title>
+<meta name="description" content="日常的光 — Yuwei Zhang 摄影系列：光线与日常。">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Cormorant+Garamond:wght@400;500;600&family=Noto+Serif+SC:wght@300;400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="layout">
+
+  <aside class="side">
+    <div class="name"><a href="index.html">Yuwei<br>Zhang</a></div>
+    <nav>
+      <ul class="nav-main">
+        <li><a href="overview.html">Overview</a></li>
+        <li>
+          <a href="series-light.html" class="has-sub">Series</a>
+          <ul class="nav-sub">
+            <li><a href="series-light.html" class="active">日常的光</a></li>
+            <li><a href="series-cat.html">猫猫</a></li>
+            <li><a href="series-wood.html">木</a></li>
+            <li><a href="series-water.html">水</a></li>
+            <li><a href="series-dancer.html">舞者</a></li>
+            <li><a href="text.html">摄影日记</a></li>
+          </ul>
+        </li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Info &amp; contact</a></li>
+      </ul>
+    </nav>
+    <div class="copyright">© 2026 Yuwei Zhang</div>
+  </aside>
+
+  <main class="main">
+    <div class="page-head">日常的光</div>
+    <div class="grid" id="grid">
+      <a href="javascript:void(0)" aria-label="夜色里望向灯桥的身影"><img src="assets/u2-12.jpg" alt="夜色里望向灯桥的身影" loading="lazy"></a>
+      <a href="javascript:void(0)" aria-label="多彩的透明亚克力装置"><img src="assets/u2-01.jpg" alt="多彩的透明亚克力装置" loading="lazy"></a>
+      <a href="javascript:void(0)" aria-label="绿色围网足球场与灯杆"><img src="assets/u-field.jpg" alt="绿色围网足球场与灯杆" loading="lazy"></a>
+      <a href="javascript:void(0)" aria-label="粉橙色黄昏天空与剪影电线杆"><img src="assets/u2-02.jpg" alt="粉橙色黄昏天空与剪影电线杆" loading="lazy"></a>
+      <a href="javascript:void(0)" aria-label="蓝色龙猫摆件与燃烧的玻璃容器"><img src="assets/u2-03.jpg" alt="蓝色龙猫摆件与燃烧的玻璃容器" loading="lazy"></a>
+      <a href="javascript:void(0)" aria-label="明暗对比的室内停车场"><img src="assets/u-parking.jpg" alt="明暗对比的室内停车场" loading="lazy"></a>
+      
+      <a href="javascript:void(0)" aria-label="江边的石栏与水"><img src="assets/u2-14.jpg" alt="江边的石栏与水" loading="lazy"></a>
+      <a href="javascript:void(0)" aria-label="蓝天下的高压输电铁塔"><img src="assets/u2-10.jpg" alt="蓝天下的高压输电铁塔" loading="lazy"></a>
+      <a href="javascript:void(0)" aria-label="透过天窗看树顶与光晕"><img src="assets/u2-09.jpg" alt="透过天窗看树顶与光晕" loading="lazy"></a>
+      <a href="javascript:void(0)" aria-label="江边的城市天际线"><img src="assets/u2-13.jpg" alt="江边的城市天际线" loading="lazy"></a>
+      <a href="javascript:void(0)" aria-label="窗框外的粉紫色霞光"><img src="assets/u2-11.jpg" alt="窗框外的粉紫色霞光" loading="lazy"></a>
+    </div>
+  </main>
+
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="作品大图">
+  <button class="lb-close" id="lbClose" aria-label="关闭"></button>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="上一张">&#8249;</button>
+  <button class="lb-nav lb-next" id="lbNext" aria-label="下一张">&#8250;</button>
+  <img id="lbImg" src="" alt="">
+  <div class="lb-cap" id="lbCap"></div>
+</div>
+
+<script>
+(function(){
+  var items = Array.prototype.slice.call(document.querySelectorAll('.grid a'));
+  var lb = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lbImg');
+  var lbCap = document.getElementById('lbCap');
+  var idx = -1;
+  function show(i){
+    if(items.length === 0) return;
+    idx = (i + items.length) % items.length;
+    var im = items[idx].querySelector('img');
+    lbImg.src = im.src;
+    lbImg.alt = im.alt;
+    lbCap.textContent = (idx + 1) + ' / ' + items.length + ' · ' + im.alt;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  items.forEach(function(a, i){
+    a.addEventListener('click', function(){ show(i); });
+  });
+  function close(){
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function next(){ if(idx >= 0) show(idx + 1); }
+  function prev(){ if(idx >= 0) show(idx - 1); }
+  document.getElementById('lbClose').addEventListener('click', close);
+  document.getElementById('lbNext').addEventListener('click', next);
+  document.getElementById('lbPrev').addEventListener('click', prev);
+  lb.addEventListener('click', function(e){ if(e.target === lb) close(); });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') close();
+    if(e.key === 'ArrowRight') next();
+    if(e.key === 'ArrowLeft') prev();
+  });
+})();
+</script>
+</body>
+</html>

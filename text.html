@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文字 · Yuwei Zhang</title>
+<meta name="description" content="摄影日记 — Yuwei Zhang 的摄影随笔。">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Cormorant+Garamond:wght@400;500;600&family=Noto+Serif+SC:wght@300;400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="layout">
+
+  <aside class="side">
+    <div class="name"><a href="index.html">Yuwei<br>Zhang</a></div>
+    <nav>
+      <ul class="nav-main">
+        <li><a href="overview.html">Overview</a></li>
+        <li>
+          <a href="series-light.html" class="has-sub">Series</a>
+          <ul class="nav-sub">
+            <li><a href="series-light.html">日常的光</a></li>
+            <li><a href="series-cat.html">猫猫</a></li>
+            <li><a href="series-wood.html">木</a></li>
+            <li><a href="series-water.html">水</a></li>
+            <li><a href="series-dancer.html">舞者</a></li>
+            <li><a href="text.html" class="active">摄影日记</a></li>
+          </ul>
+        </li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Info &amp; contact</a></li>
+      </ul>
+    </nav>
+    <div class="copyright">© 2026 Yuwei Zhang</div>
+  </aside>
+
+  <main class="main">
+    <div class="page-head">摄影日记</div>
+
+    <div class="essay-list">
+      <!--
+        写文章的用法：
+        1. 复制下面整块 <article>…</article>，粘贴到 .essay-list 的最前面；
+        2. 改标题、日期、开头和正文；缩略图填 assets/ 里的图片文件名；
+        3. 正文里可以插图：<figure><img src="assets/图片名.jpg" alt="描述"><figcaption>图注</figcaption></figure>
+      -->
+
+      <article class="essay-item">
+        <button class="essay-head" type="button">
+          <img class="essay-thumb" src="assets/u2-11.jpg" alt="窗框外的粉紫色霞光">
+          <span class="essay-head-text">
+            <span class="essay-title">窗框外的粉紫色霞光</span>
+            <span class="essay-date">2026 · 夏</span>
+          </span>
+        </button>
+        <div class="essay-summary">我住的小屋经常能在傍晚时分看到惊艳的晚霞，这和可能广州近年的异常气候有关。</div>
+        <div class="essay-body">
+          <p>蓝调，粉调，有时是不安的血色。天空下是一片户外停车场，下班的人们在这里熄灯，仿佛能感受到那股停机前的热浪。更远处是还在路上的人们，和亮起的霓虹灯。</p>
+          <p>一切随着逐渐暗淡的天色，什么平息了下来，什么又开始躁动，在这个交界之处。</p>
+          <figure>
+            <img src="assets/u2-11.jpg" alt="窗框外的粉紫色霞光">
+            <figcaption>窗框外的粉紫色霞光</figcaption>
+          </figure>
+          <p>2026.9.9</p>
+        </div>
+      </article>
+<!--
+      <article class="essay-item">
+        <button class="essay-head" type="button">
+          <img class="essay-thumb" src="assets/u-catface.jpg" alt="手托着的蓝眼灰猫">
+          <span class="essay-head-text">
+            <span class="essay-title">一只蓝眼睛的猫</span>
+            <span class="essay-date">2026 · 春</span>
+          </span>
+        </button>
+        <div class="essay-summary">它被托在掌心里，瞳孔里映着窗外的光。拍猫的时候常常发现，它们比人更懂得如何与光线相处。以下为示例文章。</div>
+        <div class="essay-body">
+          <p>示例正文：记录这只猫的名字、出现的地点，以及快门按下那一刻发生的事。</p>
+        </div>
+      </article>
+
+      <article class="essay-item">
+        <button class="essay-head" type="button">
+          <img class="essay-thumb" src="assets/u-grass.jpg" alt="水边垂伸的绿色草本">
+          <span class="essay-head-text">
+            <span class="essay-title">水边的草本</span>
+            <span class="essay-date">2026 · 春</span>
+          </span>
+        </button>
+        <div class="essay-summary">水边垂伸下来的草，穗子在风里微微地晃。低下头才能看见的植物，通常也有自己的影子。以下为示例文章。</div>
+        <div class="essay-body">
+          <p>示例正文：写一写拍摄时的位置、天气，和这张照片背后的故事。</p>
+        </div>
+      </article>
+    </div>
+
+  </main>
+ -->
+</div>
+
+<script>
+(function(){
+  var heads = Array.prototype.slice.call(document.querySelectorAll('.essay-head'));
+  heads.forEach(function(h){
+    h.addEventListener('click', function(){
+      var item = h.parentNode;
+      var isOpen = item.classList.contains('open');
+      heads.forEach(function(x){ x.parentNode.classList.remove('open'); });
+      if(!isOpen) item.classList.add('open');
+    });
+  });
+})();
+</script>
+</body>
+</html>

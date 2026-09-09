@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>舞者 · Yuwei Zhang</title>
+<meta name="description" content="舞者 — Yuwei Zhang 摄影系列：身体与即兴。">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Cormorant+Garamond:wght@400;500;600&family=Noto+Serif+SC:wght@300;400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="layout">
+
+  <aside class="side">
+    <div class="name"><a href="index.html">Yuwei<br>Zhang</a></div>
+    <nav>
+      <ul class="nav-main">
+        <li><a href="overview.html">Overview</a></li>
+        <li>
+          <a href="series-light.html" class="has-sub">Series</a>
+          <ul class="nav-sub">
+            <li><a href="series-light.html">日常的光</a></li>
+            <li><a href="series-cat.html">猫猫</a></li>
+            <li><a href="series-wood.html">木</a></li>
+            <li><a href="series-water.html">水</a></li>
+            <li><a href="series-dancer.html" class="active">舞者</a></li>
+            <li><a href="text.html">摄影日记</a></li>
+          </ul>
+        </li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Info &amp; contact</a></li>
+      </ul>
+    </nav>
+    <div class="copyright">© 2026 Yuwei Zhang</div>
+  </aside>
+
+  <main class="main">
+    <div class="page-head">舞者</div>
+    <div class="grid" id="grid">
+      <a href="javascript:void(0)" aria-label="肢体接触的即兴"><img src="assets/u-dance-07.jpg" alt="肢体接触的即兴" loading="lazy"></a>
+      <a href="javascript:void(0)" aria-label="舞室里的肖像"><img src="assets/u-dance-10.jpg" alt="舞室里的肖像" loading="lazy"></a>
+      <a href="javascript:void(0)" aria-label="双人舞的交流"><img src="assets/u-dance-04.jpg" alt="双人舞的交流" loading="lazy"></a>
+      <a href="javascript:void(0)" aria-label="排练中的双人互动"><img src="assets/u-dance-02.jpg" alt="排练中的双人互动" loading="lazy"></a>
+      <a href="javascript:void(0)" aria-label="沙滩上的持伞者"><img src="assets/u-dance-13.jpg" alt="沙滩上的Yasukichi" loading="lazy"></a>
+      <a href="javascript:void(0)" aria-label="幕布前的协作支撑"><img src="assets/u-dance-06.jpg" alt="幕布前的协作支撑" loading="lazy"></a>
+      <a href="javascript:void(0)" aria-label="玻璃前的身体练习"><img src="assets/u-dance-05.jpg" alt="玻璃前的身体练习" loading="lazy"></a>
+      <a href="javascript:void(0)" aria-label="搭在背上的手"><img src="assets/u-dance-12.jpg" alt="搭在背上的手" loading="lazy"></a>
+      <a href="javascript:void(0)" aria-label="地面上的缠绕"><img src="assets/u-dance-11.jpg" alt="地面上的缠绕" loading="lazy"></a>
+      <a href="javascript:void(0)" aria-label="裹着布的人"><img src="assets/u-dance-08.jpg" alt="裹着布的人" loading="lazy"></a>
+      <a href="javascript:void(0)" aria-label="工作坊里的拥抱"><img src="assets/u-dance-09.jpg" alt="工作坊里的拥抱" loading="lazy"></a>
+      <a href="javascript:void(0)" aria-label="集体练习中的走动"><img src="assets/u-dance-01.jpg" alt="集体练习中的走动" loading="lazy"></a>
+      <a href="javascript:void(0)" aria-label="窗边的午后休息"><img src="assets/u-dance-03.jpg" alt="窗边的午后休息" loading="lazy"></a>
+    </div>
+  </main>
+
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="作品大图">
+  <button class="lb-close" id="lbClose" aria-label="关闭"></button>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="上一张">&#8249;</button>
+  <button class="lb-nav lb-next" id="lbNext" aria-label="下一张">&#8250;</button>
+  <img id="lbImg" src="" alt="">
+  <div class="lb-cap" id="lbCap"></div>
+</div>
+
+<script>
+(function(){
+  var items = Array.prototype.slice.call(document.querySelectorAll('.grid a'));
+  var lb = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lbImg');
+  var lbCap = document.getElementById('lbCap');
+  var idx = -1;
+  function show(i){
+    if(items.length === 0) return;
+    idx = (i + items.length) % items.length;
+    var im = items[idx].querySelector('img');
+    lbImg.src = im.src;
+    lbImg.alt = im.alt;
+    lbCap.textContent = (idx + 1) + ' / ' + items.length + ' · ' + im.alt;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  items.forEach(function(a, i){
+    a.addEventListener('click', function(){ show(i); });
+  });
+  function close(){
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function next(){ if(idx >= 0) show(idx + 1); }
+  function prev(){ if(idx >= 0) show(idx - 1); }
+  document.getElementById('lbClose').addEventListener('click', close);
+  document.getElementById('lbNext').addEventListener('click', next);
+  document.getElementById('lbPrev').addEventListener('click', prev);
+  lb.addEventListener('click', function(e){ if(e.target === lb) close(); });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') close();
+    if(e.key === 'ArrowRight') next();
+    if(e.key === 'ArrowLeft') prev();
+  });
+})();
+</script>
+</body>
+</html>

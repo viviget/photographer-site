@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>水 · Yuwei Zhang</title>
+<meta name="description" content="水 — Yuwei Zhang 摄影系列：水。">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Cormorant+Garamond:wght@400;500;600&family=Noto+Serif+SC:wght@300;400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="layout">
+
+  <aside class="side">
+    <div class="name"><a href="index.html">Yuwei<br>Zhang</a></div>
+    <nav>
+      <ul class="nav-main">
+        <li><a href="overview.html">Overview</a></li>
+        <li>
+          <a href="series-light.html" class="has-sub">Series</a>
+          <ul class="nav-sub">
+            <li><a href="series-light.html">日常的光</a></li>
+            <li><a href="series-cat.html">猫猫</a></li>
+            <li><a href="series-wood.html">木</a></li>
+            <li><a href="series-water.html" class="active">水</a></li>
+            <li><a href="series-dancer.html">舞者</a></li>
+            <li><a href="text.html">文字</a></li>
+          </ul>
+        </li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Info &amp; contact</a></li>
+      </ul>
+    </nav>
+    <div class="copyright">© 2026 Yuwei Zhang</div>
+  </aside>
+
+  <main class="main">
+    <div class="page-head">水</div>
+    <div class="grid" id="grid">
+      <a href="javascript:void(0)" aria-label="淡绿浑浊水中的两只鳖"><img src="assets/u-turtle.jpg" alt="淡绿浑浊水中的两只鳖" loading="lazy"></a>
+      <a href="javascript:void(0)" aria-label="水边堤岸与水中植物"><img src="assets/u-watere.jpg" alt="水边堤岸与水中植物" loading="lazy"></a>
+      <a href="javascript:void(0)" aria-label="清冷的水边堤岸与水纹"><img src="assets/u-bank.jpg" alt="清冷的水边堤岸与水纹" loading="lazy"></a>
+      <a href="javascript:void(0)" aria-label="阴云下的港口、货船与起重机"><img src="assets/u2-08.jpg" alt="阴云下的港口、货船与起重机" loading="lazy"></a>
+    </div>
+  </main>
+
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="作品大图">
+  <button class="lb-close" id="lbClose" aria-label="关闭"></button>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="上一张">&#8249;</button>
+  <button class="lb-nav lb-next" id="lbNext" aria-label="下一张">&#8250;</button>
+  <img id="lbImg" src="" alt="">
+  <div class="lb-cap" id="lbCap"></div>
+</div>
+
+<script>
+(function(){
+  var items = Array.prototype.slice.call(document.querySelectorAll('.grid a'));
+  var lb = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lbImg');
+  var lbCap = document.getElementById('lbCap');
+  var idx = -1;
+  function show(i){
+    if(items.length === 0) return;
+    idx = (i + items.length) % items.length;
+    var im = items[idx].querySelector('img');
+    lbImg.src = im.src;
+    lbImg.alt = im.alt;
+    lbCap.textContent = (idx + 1) + ' / ' + items.length + ' · ' + im.alt;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  items.forEach(function(a, i){
+    a.addEventListener('click', function(){ show(i); });
+  });
+  function close(){
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function next(){ if(idx >= 0) show(idx + 1); }
+  function prev(){ if(idx >= 0) show(idx - 1); }
+  document.getElementById('lbClose').addEventListener('click', close);
+  document.getElementById('lbNext').addEventListener('click', next);
+  document.getElementById('lbPrev').addEventListener('click', prev);
+  lb.addEventListener('click', function(e){ if(e.target === lb) close(); });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') close();
+    if(e.key === 'ArrowRight') next();
+    if(e.key === 'ArrowLeft') prev();
+  });
+})();
+</script>
+</body>
+</html>

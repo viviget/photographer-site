@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>木 · Yuwei Zhang</title>
+<meta name="description" content="木 — Yuwei Zhang 摄影系列：植物与树木。">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Cormorant+Garamond:wght@400;500;600&family=Noto+Serif+SC:wght@300;400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="layout">
+
+  <aside class="side">
+    <div class="name"><a href="index.html">Yuwei<br>Zhang</a></div>
+    <nav>
+      <ul class="nav-main">
+        <li><a href="overview.html">Overview</a></li>
+        <li>
+          <a href="series-light.html" class="has-sub">Series</a>
+          <ul class="nav-sub">
+            <li><a href="series-light.html">日常的光</a></li>
+            <li><a href="series-cat.html">猫猫</a></li>
+            <li><a href="series-wood.html" class="active">木</a></li>
+            <li><a href="series-water.html">水</a></li>
+            <li><a href="series-dancer.html">舞者</a></li>
+            <li><a href="text.html">摄影日记</a></li>
+          </ul>
+        </li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Info &amp; contact</a></li>
+      </ul>
+    </nav>
+    <div class="copyright">© 2026 Yuwei Zhang</div>
+  </aside>
+
+  <main class="main">
+    <div class="page-head">木</div>
+    <div class="grid" id="grid">
+      <a href="javascript:void(0)" aria-label="浅米背景上的三支枯萎玫瑰"><img src="assets/u2-04.jpg" alt="浅米背景上的三支枯萎玫瑰" loading="lazy"></a>
+      <a href="javascript:void(0)" aria-label="浅米背景上的枯萎玫瑰"><img src="assets/u-rose.jpg" alt="浅米背景上的枯萎玫瑰" loading="lazy"></a>
+      <a href="javascript:void(0)" aria-label="动态模糊中的绿色叶片"><img src="assets/u-leaves.jpg" alt="动态模糊中的绿色叶片" loading="lazy"></a>
+      <a href="javascript:void(0)" aria-label="两侧红叶灌木的园林小径"><img src="assets/u2-05.jpg" alt="两侧红叶灌木的园林小径" loading="lazy"></a>
+      <a href="javascript:void(0)" aria-label="绿色草茎特写"><img src="assets/u2-06.jpg" alt="绿色草茎特写" loading="lazy"></a>
+      <a href="javascript:void(0)" aria-label="樱花树下仰头拍摄的人"><img src="assets/u-hero.jpg" alt="樱花树下仰头拍摄的人" loading="lazy"></a>
+      <a href="javascript:void(0)" aria-label="水边垂伸的绿色草本"><img src="assets/u-grass.jpg" alt="水边垂伸的绿色草本" loading="lazy"></a>
+      <a href="javascript:void(0)" aria-label="仰视大树与天空"><img src="assets/u-wood16.jpg" alt="仰视大树与天空" loading="lazy"></a>
+      <a href="javascript:void(0)" aria-label="带着紫褐籽粒的草茎"><img src="assets/u2-07.jpg" alt="带着紫褐籽粒的草茎" loading="lazy"></a>
+      <a href="javascript:void(0)" aria-label="蛛网上的蜘蛛"><img src="assets/u-wood05.jpg" alt="蛛网上的蜘蛛" loading="lazy"></a>
+      
+    </div>
+  </main>
+
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="作品大图">
+  <button class="lb-close" id="lbClose" aria-label="关闭"></button>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="上一张">&#8249;</button>
+  <button class="lb-nav lb-next" id="lbNext" aria-label="下一张">&#8250;</button>
+  <img id="lbImg" src="" alt="">
+  <div class="lb-cap" id="lbCap"></div>
+</div>
+
+<script>
+(function(){
+  var items = Array.prototype.slice.call(document.querySelectorAll('.grid a'));
+  var lb = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lbImg');
+  var lbCap = document.getElementById('lbCap');
+  var idx = -1;
+  function show(i){
+    if(items.length === 0) return;
+    idx = (i + items.length) % items.length;
+    var im = items[idx].querySelector('img');
+    lbImg.src = im.src;
+    lbImg.alt = im.alt;
+    lbCap.textContent = (idx + 1) + ' / ' + items.length + ' · ' + im.alt;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  items.forEach(function(a, i){
+    a.addEventListener('click', function(){ show(i); });
+  });
+  function close(){
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function next(){ if(idx >= 0) show(idx + 1); }
+  function prev(){ if(idx >= 0) show(idx - 1); }
+  document.getElementById('lbClose').addEventListener('click', close);
+  document.getElementById('lbNext').addEventListener('click', next);
+  document.getElementById('lbPrev').addEventListener('click', prev);
+  lb.addEventListener('click', function(e){ if(e.target === lb) close(); });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') close();
+    if(e.key === 'ArrowRight') next();
+    if(e.key === 'ArrowLeft') prev();
+  });
+})();
+</script>
+</body>
+</html>
